@@ -28,6 +28,9 @@ npx github:dealenx/actualbudget-tbank-import выписка.csv
 
 ```bash
 bunx github:dealenx/actualbudget-tbank-import#v0.1.0 выписка.csv
+```
+
+```bash
 npx github:dealenx/actualbudget-tbank-import#v0.1.0 выписка.csv
 ```
 
