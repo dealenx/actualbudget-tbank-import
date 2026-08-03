@@ -127,8 +127,26 @@ function parseAmount(amountStr: string, operationType: string): number {
   return operationType === 'Дебет' ? -Math.abs(value) : Math.abs(value);
 }
 
+const ABBREVIATIONS = [
+  'АО', 'ЗАО', 'ОАО', 'ООО', 'ПАО', 'ИП', 'НКО', 'КПК',
+  'СНТ', 'ДНТ', 'ТСН', 'ТСЖ', 'ЖСК', 'ГУП', 'МУП',
+];
+
+function normalizePayee(name: string): string {
+  let result = name;
+  for (const abbr of ABBREVIATIONS) {
+    const regex = new RegExp(`(?<=^|[\\s"])${escapeRegex(abbr)}(?=[\\s"]|$)`, 'gi');
+    result = result.replace(regex, abbr);
+  }
+  return result;
+}
+
+function escapeRegex(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function extractPayee(raw: TbankRawRow): string {
-  return raw.counterpartyName || raw.payerName || raw.recipientName || '';
+  return normalizePayee(raw.counterpartyName || raw.payerName || raw.recipientName || '');
 }
 
 function extractNotes(raw: TbankRawRow): string {
