@@ -8,6 +8,7 @@ export default function TbankConverter() {
   const [fileName, setFileName] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isSample, setIsSample] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const sampleCsv = `Номер счёта;Тип операции (пополнение/списание);Дата проведения;Номер платежа;Валюта операции;Сумма в валюте счёта;Валюта счёта;Описание операции;Назначение платежа;Счет плательщика;ИНН плательщика;КПП плательщика;Наименование плательщика;БИК банка плательщика;Корр. счет плательщика;Счет получателя;Договор получателя;ИНН получателя;КПП получателя;Наименование получателя;БИК банка получателя;Корр. счет получателя;Счет контрагента;ИНН контрагента;Наименование контрагента;БИК банка контрагента
@@ -20,8 +21,31 @@ export default function TbankConverter() {
   const loadSample = () => {
     setError(null);
     setFileName('example.csv');
+    setIsSample(true);
     const parsed = parseTbankCsv(sampleCsv);
     setRows(parsed);
+  };
+
+  const downloadSampleOriginal = () => {
+    const blob = new Blob(['\uFEFF' + sampleCsv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'sample_tbank.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadSampleConverted = () => {
+    const parsed = parseTbankCsv(sampleCsv);
+    const csv = convertToActualCsv(parsed);
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'sample_actualbudget.csv';
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const processFile = useCallback((file: File) => {
@@ -93,7 +117,7 @@ export default function TbankConverter() {
         <p className="text-zinc-500 dark:text-zinc-400 mb-2 text-center max-w-md">
           Конвертер выписки Т-Банка в CSV для импорта в Actual Budget
         </p>
-        <p className="text-xs text-zinc-400 dark:text-zinc-500 mb-8 text-center max-w-md">
+        <p className="text-xs text-zinc-400 dark:text-zinc-500 mb-12 text-center max-w-md">
           Ваши данные не отправляются на сервер — вся конвертация происходит в вашем браузере.
         </p>
 
@@ -124,12 +148,25 @@ export default function TbankConverter() {
           </p>
         </div>
 
-        <button
-          onClick={loadSample}
-          className="mt-3 text-sm text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 underline transition-colors"
-        >
-          Или загрузить пример
-        </button>
+        <div className="mt-16 w-full max-w-lg">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-zinc-200 dark:border-zinc-800"></div>
+            </div>
+            <div className="relative flex justify-center">
+              <span className="bg-white dark:bg-black px-4 text-xs text-zinc-400 dark:text-zinc-500">или попробуйте с примером</span>
+            </div>
+          </div>
+
+          <div className="mt-5 flex flex-col items-center gap-3">
+            <button
+              onClick={loadSample}
+              className="w-full h-11 rounded-xl border-2 border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 font-medium hover:border-blue-400 hover:text-blue-600 dark:hover:border-blue-500 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-all"
+            >
+              Загрузить пример выписки
+            </button>
+          </div>
+        </div>
 
         {error && (
           <div className="mt-6 p-4 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-300 text-sm max-w-lg w-full">
@@ -158,11 +195,11 @@ export default function TbankConverter() {
               </div>
             </div>
 
-            <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-2">
+            <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-3">
               Период: {dateRange}
             </p>
 
-            <div className="mt-6 w-full overflow-x-auto">
+            <div className="mt-8 w-full overflow-x-auto">
               <table className="w-full text-sm border-collapse">
                 <thead>
                   <tr className="border-b border-zinc-200 dark:border-zinc-800">
@@ -187,12 +224,31 @@ export default function TbankConverter() {
               </table>
             </div>
 
-            <button
-              onClick={handleDownload}
-              className="mt-6 h-12 px-8 rounded-full bg-black text-white dark:bg-white dark:text-black font-medium hover:opacity-80 transition-opacity"
-            >
-              Скачать CSV для Actual Budget
-            </button>
+            {isSample && (
+              <div className="mt-6 flex gap-4 w-full">
+                <button
+                  onClick={downloadSampleOriginal}
+                  className="flex-1 h-12 rounded-xl border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-500 dark:text-zinc-400 font-medium hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all"
+                >
+                  Скачать пример Т-Банк
+                </button>
+                <button
+                  onClick={downloadSampleConverted}
+                  className="flex-1 h-12 rounded-xl border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-500 dark:text-zinc-400 font-medium hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all"
+                >
+                  Скачать пример Actual
+                </button>
+              </div>
+            )}
+
+            <div className="mt-8">
+              <button
+                onClick={handleDownload}
+                className="h-12 px-8 rounded-full bg-black text-white dark:bg-white dark:text-black font-medium hover:opacity-80 transition-opacity"
+              >
+                Скачать CSV для Actual Budget
+              </button>
+            </div>
           </>
         )}
       </main>
