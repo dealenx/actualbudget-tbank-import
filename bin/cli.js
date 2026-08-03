@@ -161,6 +161,12 @@ function main() {
     const content = bom + csv;
     if (args.length > 1) {
       fs.writeFileSync(path.resolve(args[1]), content, 'utf-8');
+    } else if (args.length === 1) {
+      const inputPath = path.resolve(args[0]);
+      const parsed = path.parse(inputPath);
+      const outputPath = path.join(parsed.dir, parsed.name + '-converted' + parsed.ext);
+      fs.writeFileSync(outputPath, content, 'utf-8');
+      process.stderr.write(`Сохранено: ${outputPath}\n`);
     } else {
       process.stdout.write(content);
     }
