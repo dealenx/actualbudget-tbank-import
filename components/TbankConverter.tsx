@@ -164,7 +164,7 @@ export default function TbankConverter() {
           <div className="mt-5 flex flex-col items-center gap-3">
             <button
               onClick={loadSample}
-              className="w-full h-11 rounded-xl border-2 border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 font-medium hover:border-blue-400 hover:text-blue-600 dark:hover:border-blue-500 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-all"
+              className="w-full h-11 rounded-xl border-2 border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 font-medium hover:border-blue-400 hover:text-blue-600 dark:hover:border-blue-500 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-all cursor-pointer"
             >
               Загрузить пример выписки
             </button>
@@ -231,13 +231,13 @@ export default function TbankConverter() {
               <div className="mt-6 flex gap-4 w-full">
                 <button
                   onClick={downloadSampleOriginal}
-                  className="flex-1 h-12 rounded-xl border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-500 dark:text-zinc-400 font-medium hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all"
+                  className="flex-1 h-12 rounded-xl border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-500 dark:text-zinc-400 font-medium hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all cursor-pointer"
                 >
                   Скачать пример Т-Банк
                 </button>
                 <button
                   onClick={downloadSampleConverted}
-                  className="flex-1 h-12 rounded-xl border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-500 dark:text-zinc-400 font-medium hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all"
+                  className="flex-1 h-12 rounded-xl border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-500 dark:text-zinc-400 font-medium hover:border-zinc-300 dark:hover:border-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all cursor-pointer"
                 >
                   Скачать пример Actual
                 </button>
@@ -250,7 +250,7 @@ export default function TbankConverter() {
             <div className="mt-8">
               <button
                 onClick={handleDownload}
-                className="h-12 px-8 rounded-full bg-black text-white dark:bg-white dark:text-black font-medium hover:opacity-80 transition-opacity"
+                className="h-12 px-8 rounded-full bg-black text-white dark:bg-white dark:text-black font-medium hover:opacity-80 transition-opacity cursor-pointer"
               >
                 Скачать CSV для Actual Budget
               </button>
