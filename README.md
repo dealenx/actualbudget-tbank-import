@@ -6,7 +6,11 @@
 
 ## Использование
 
-### CLI (рекомендуется)
+### Веб-версия (проще всего)
+
+Откройте [страницу на GitHub Pages](https://dealenx.github.io/actualbudget-tbank-import/), перетащите CSV-файл и скачайте конвертированный.
+
+### CLI (локально, без браузера)
 
 ```bash
 bunx github:dealenx/actualbudget-tbank-import выписка.csv
@@ -25,10 +29,6 @@ node bin/cli.js выписка.csv
 ```bash
 cat выписка.csv | node bin/cli.js > результат.csv
 ```
-
-### Веб-версия
-
-Откройте [страницу на GitHub Pages](https://dealenx.github.io/actualbudget-tbank-import/), перетащите CSV-файл и скачайте конвертированный.
 
 ## Импорт в Actual Budget
 
