@@ -12,8 +12,23 @@
 
 ### CLI (локально, без браузера)
 
+**Через bunx (быстрее):**
+
 ```bash
 bunx github:dealenx/actualbudget-tbank-import выписка.csv
+```
+
+**Через npx:**
+
+```bash
+npx github:dealenx/actualbudget-tbank-import выписка.csv
+```
+
+**Конкретная версия (через тег):**
+
+```bash
+bunx github:dealenx/actualbudget-tbank-import#v0.1.0 выписка.csv
+npx github:dealenx/actualbudget-tbank-import#v0.1.0 выписка.csv
 ```
 
 Рядом с файлом появится `выписка-converted.csv` — его импортировать в Actual Budget.
