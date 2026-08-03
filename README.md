@@ -1,6 +1,6 @@
 # Т-Банк → Actual Budget
 
-Конвертер выписки Т-Банка (расчётный счёт ИП) в CSV для импорта в [Actual Budget](https://actualbudget.org).
+Конвертер выписки Т-Банка в CSV для импорта в [Actual Budget](https://actualbudget.org).
 
 Вся конвертация происходит локально — данные не отправляются на сервер.
 
