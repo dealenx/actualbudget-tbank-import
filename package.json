@@ -1,7 +1,6 @@
 {
   "name": "actualbudget-tbank-import",
   "version": "0.1.0",
-  "private": true,
   "bin": {
     "tbank-convert": "./bin/cli.js"
   },
@@ -11,12 +10,11 @@
     "start": "next start",
     "lint": "eslint"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "next": "16.2.12",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
-  },
-  "devDependencies": {
+    "react-dom": "19.2.4",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
