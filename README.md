@@ -18,12 +18,6 @@ bunx github:dealenx/actualbudget-tbank-import выписка.csv
 
 Рядом с файлом появится `выписка-converted.csv` — его импортировать в Actual Budget.
 
-**Или через stdin/stdout:**
-
-```bash
-cat выписка.csv | node bin/cli.js > результат.csv
-```
-
 ## Импорт в Actual Budget
 
 1. Откройте счёт → **Import** → выберите `-converted.csv`
